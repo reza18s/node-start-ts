@@ -13,10 +13,16 @@ configDotenv({ path: "./config.env" });
 app.use(helmet());
 // eslint-disable-next-line prefer-destructuring
 const DB = process.env.DB;
-mongoose.connect(DB).then(() => {
-   // eslint-disable-next-line no-console
-   console.log("mongodb is connected");
-});
+mongoose
+   .connect(DB)
+   .then(() => {
+      // eslint-disable-next-line no-console
+      console.log("mongodb is connected");
+   })
+   .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+   });
 app.use(xssFilter());
 app.use(express.static(`${__dirname}/public`));
 
