@@ -2,44 +2,61 @@
    "env": {
       "browser": true,
       "commonjs": true,
-
-      "es2021": true
+      "es2021": true,
+      "node": true
    },
-   "extends": [
-      // "eslint:recommended",
-      // "airbnb",
-      // "prettier",
-      // "plugin:node/recommended",
-      // "standard-with-typescript",
-      "plugin:@typescript-eslint/recommended"
-   ],
-   "parser": "@typescript-eslint/parser",
    "parserOptions": {
-      "ecmaVersion": "latest"
+      "ecmaFeatures": {
+         "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
    },
-   "plugins": ["@typescript-eslint", "prettier"],
+   "parser": "@typescript-eslint/parser",
+   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+   "plugins": ["@typescript-eslint"],
    "rules": {
-      "indent": ["error", 3],
-      "linebreak-style": ["error", "windows"],
-      "quotes": ["error", "double"],
-      "semi": ["error", "always"],
-      "spaced-comment": "off",
+      // Possible errors
       "no-console": "warn",
-      "consistent-return": "off",
-      "func-names": "off",
-      "object-shorthand": "off",
-      "no-process-exit": "off",
-      "no-param-reassign": "off",
-      "no-return-await": "off",
-      "no-underscore-dangle": "off",
-      "class-methods-use-this": "off",
-      "prefer-destructuring": ["error", { "object": true, "array": false }],
-      "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": [
-         "warn",
-         { "argsIgnorePattern": "req|res|next|val|err" }
-      ]
-      // "no-unused-vars":
+      // Best practices
+      "dot-notation": "error",
+      "no-floating-decimal": "error",
+      "no-sequences": "error",
+      "no-unused-vars": "warn",
+      // Stylistic
+      "array-bracket-spacing": "error",
+      "computed-property-spacing": ["error", "never"],
+      "curly": "error",
+      "no-lonely-if": "error",
+      "no-unneeded-ternary": "error",
+      "one-var-declaration-per-line": "error",
+      "quotes": [
+         "error",
+         "double",
+         {
+            "allowTemplateLiterals": false,
+            "avoidEscape": true
+         }
+      ],
+      // ES6
+      "array-callback-return": "off",
+      "prefer-const": "error",
+      // Imports
+      "import/prefer-default-export": "off",
+      "sort-imports": [
+         "error",
+         {
+            "ignoreCase": true,
+            "ignoreDeclarationSort": true
+         }
+      ],
+      "tailwindcss/no-contradicting-classname": "off",
+      "no-unused-expressions": "off",
+      "no-prototype-builtins": "off"
+   },
+   "settings": {
+      "react": {
+         "version": "detect"
+      }
    }
 }

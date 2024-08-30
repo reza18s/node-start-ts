@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { IUserDocument, Role, IModel } from "../types";
+import { model, Schema } from "mongoose";
+import { IModel, IUserDocument, Role } from "../types";
 import bcrypt from "bcryptjs";
 import { createHash, randomBytes } from "crypto";
 export const userSchema = new Schema<IUserDocument>({
@@ -45,14 +45,18 @@ export const userSchema = new Schema<IUserDocument>({
    active: { type: Boolean, default: true, select: false },
 });
 userSchema.pre("save", async function (next) {
-   if (!this.isModified("password")) return next();
+   if (!this.isModified("password")) {
+      return next();
+   }
 
    this.password = await bcrypt.hash(this.password, 12);
    this.passwordConfirm = undefined;
    next();
 });
 userSchema.pre("save", function (next) {
-   if (!this.isModified("password") || this.isNew) return next();
+   if (!this.isModified("password") || this.isNew) {
+      return next();
+   }
    this.passwordChangedAt = new Date().toISOString();
    next();
 });
@@ -63,7 +67,7 @@ userSchema.pre(/^find/, function (this: IModel, next) {
 userSchema.methods.correctPassword = async function (
    candidatePassword: string,
    userPassword: string,
-): Promise<string> {
+): Promise<boolean> {
    return await bcrypt.compare(candidatePassword, userPassword);
 };
 userSchema.methods.changedPasswordAfter = function (JWT: number): boolean {
