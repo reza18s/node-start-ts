@@ -1,25 +1,22 @@
 {
    "compilerOptions": {
-      "module": "NodeNext",
-      // "noEmit": true,
-      // "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      // "allowImportingTsExtensions": true,
-      "target": "ES2022",
-      "noImplicitAny": false,
-      "moduleResolution": "NodeNext",
-      // "noUnusedLocals": true /* Report errors on unused locals. */,
-      // "noUnusedParameters": true,
-      "declaration": true,
-      // "sourceMap": true,
-      "outDir": "dist",
-      "skipLibCheck": true
-      // "rootDir": "/src/**/*"
-
-      // "esModuleInterop": true
-      // "baseUrl": "."
-      // "paths": {
-      //   "*": ["node_modules/*", "src/types/*"]
-      // }
-   }
+      "target": "ES2020", // Specify ECMAScript target version
+      "module": "commonjs", // Specify module code generation
+      "lib": ["ES2020"], // Specify library files to be included in the compilation
+      "strict": true, // Enable all strict type-checking options
+      "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
+      "skipLibCheck": true, // Skip type checking of all declaration files (*.d.ts)
+      "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
+      "moduleResolution": "node", // Specify module resolution strategy
+      "resolveJsonModule": true, // Include modules imported with .json extension
+      "outDir": "./dist", // Redirect output structure to the directory
+      "rootDir": "./src", // Specify the root directory of input files
+      "baseUrl": ".", // Base directory to resolve non-relative module names
+      "paths": {
+         "@/*": ["src/*"] // Enable absolute imports from the src directory
+      },
+      "types": ["node"] // Specify types for your project
+   },
+   "include": ["src/**/*.ts"], // Include all .ts files in the src directory
+   "exclude": ["node_modules", "dist"] // Exclude node_modules and dist directories
 }
